@@ -5,7 +5,6 @@ export const GenerateLinks = () => {
     
     const {login} = useAuth()
     const {active} = useUsers()
-    console.log(active)
     const Links = [
         {
             pageName: 'Home',

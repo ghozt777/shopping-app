@@ -5,15 +5,21 @@ import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from 'react-router-dom'
 import {UsersProvider} from './components/UsersProvider'
 import {AuthProvider} from './components/AuthProvider'
+import {ApiProvider} from './components/FakeApi'
+import {LoadingProvider} from './components/LoadingProvider'
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-    <UsersProvider>
-      <AuthProvider>
-          <App />
-      </AuthProvider>
-    </UsersProvider>
+      <UsersProvider>
+        <LoadingProvider>
+          <ApiProvider>
+            <AuthProvider>
+              <App />
+            </AuthProvider>
+          </ApiProvider>
+        </LoadingProvider>
+      </UsersProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
