@@ -9,6 +9,7 @@ export const CreateAccount = () => {
     const {setLogin} = useAuth()
     const navigate = useNavigate()
     const {state} = useLocation
+    const now = new Date()
 
     function clickHandler(){
         
@@ -48,7 +49,8 @@ export const CreateAccount = () => {
             onChange = {(e) => setUserInfo(prevState => {
                 return{
                     ...prevState,
-                    password: e.target.value 
+                    password: e.target.value,
+                    lastSuccessfulLogin: now.toString()
                 }
             })}
             

@@ -1,5 +1,6 @@
 import {GenerateLinks} from './LinksDB'
 import { NavLink } from 'react-router-dom'
+import { LastLogin } from './LastLogin'
 
 export const NavBar = () => {
     
@@ -24,6 +25,7 @@ export const NavBar = () => {
                     })
                 }
             </nav>
+            <LastLogin/>
             <div style={{padding:'0rem 0rem 0.3rem 0rem' , backgroundColor:'black' , margin:'0rem 1rem'}}></div>
         </>
     )

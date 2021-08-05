@@ -9,20 +9,30 @@ export const Login = () => {
     const {state} = useLocation()
     const navigate = useNavigate()
     const [userInfo,setUserInfo] = useState({username:'' , password:''})
-    const {users,setActive} = useUsers()
+    const {users,setUsers,setActive} = useUsers()
     const {setLogin} = useAuth()
     
     const clickHandler = () => {
         const user = users.find(user => user.username===userInfo.username)
         if(user){
+            const now = new Date()
             if(user.password === userInfo.password){
                 setLogin(true)
                 setActive(user.username)
-                localStorage.setItem('active' , JSON.stringify(user.username))
+                setUsers(users.map(usr => 
+                    usr.username === userInfo.username ? 
+                    {...usr , lastSuccessfulLogin: now.toString()} : usr   
+                ))
                 navigate(state?.from? state.from : '/')
 
             }
             else{
+                setLogin(false)
+                setActive('')
+                setUsers(users.map(usr => 
+                    usr.username === userInfo.username ? 
+                    {...usr , lastUnSuccessfulLogin: now.toString()} : usr   
+                ))
                 alert('Wrong Password 🥲')
             }
         }
