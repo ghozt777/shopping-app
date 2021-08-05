@@ -1,4 +1,4 @@
-import '/Users/lonewolf777/Documents/shopping/src/styles/App.css';
+import '../styles/App.css';
 import {Home} from '../pages/Home'
 import {Address} from '../pages/Address'
 import {Routes,Route} from 'react-router-dom'
