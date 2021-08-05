@@ -1,13 +1,11 @@
 import {NavLink} from 'react-router-dom'
 import {useLocation} from 'react-router-dom'
 import {useAuth} from '../components/AuthProvider'
-import {useUsers} from '../components/UsersProvider'
 
 export const Credentials = () => {
     
     const {state} = useLocation()
-    const {login,setLogin} = useAuth()
-    const {setActive} = useUsers()
+    const {login} = useAuth()
     function generateContent(){
         
         const headMessage = state?.from? <h1>To Access <span style={{color:'red'}}>{state.from}</span> Please Login</h1> :
@@ -27,10 +25,6 @@ export const Credentials = () => {
             return(
                 <>
                     <h1> You are alredy logged in </h1>
-                    <button onClick ={() => {
-                        setLogin(false)
-                        setActive('')
-                    }}>Log Out</button>
                 </>
             )
         }
