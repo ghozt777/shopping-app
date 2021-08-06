@@ -21,7 +21,7 @@ export const Cart = () => {
             <ul>
             {
                 cartItems.map(item => {
-                    return(
+                    return item.quantity>0 ? (
                         <li>
                             {item.name}  {item.price}  {item.quantity} 
                             <button onClick = {() => {
@@ -33,6 +33,8 @@ export const Cart = () => {
                                 setProducts({type:'ADD_ALL',payload:item.id})
                                 }}> Delete Item </button>
                         </li>
+                    ) :(
+                        <></>
                     )
                 })
             }
