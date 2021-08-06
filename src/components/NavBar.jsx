@@ -41,7 +41,7 @@ export const NavBar = () => {
                                 fontSize:'2rem',
                                 fontWeight:'bold'
                             }}
-                            style={{ textDecoration:'none' ,marginLeft:'0.3rem'}}
+                            style={{ textDecoration:'none' ,marginLeft:'0.3rem', color:'red'}}
                             to={link.path}> { link.pageName } </NavLink> 
                             <div style={{display:'inline' , fontSize:'2rem'}}> || </div>
                             </>

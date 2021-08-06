@@ -8,6 +8,7 @@ import {CreateAccount} from '../pages/CreateAccount'
 import {Login} from '../pages/Login'
 import {PrivateRoute} from './PrivateRoute'
 import {Cart} from '../pages/Cart'
+import {Products} from '../pages/Products'
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
         <Route path='/credentials' element={<Credentials />} />
         <Route path='/create-account' element={<CreateAccount />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/products' element={<Products />} />
+        <Route path='/products/:id' element={<Products />} />
         <PrivateRoute path='/Cart' element={<Cart /> } />
       </Routes>
     </div>

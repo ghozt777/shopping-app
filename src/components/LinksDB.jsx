@@ -21,6 +21,10 @@ export const GenerateLinks = () => {
         {
             pageName: 'Cart',
             path: '/cart'
+        },
+        {
+            pageName: 'products',
+            path: '/products'
         }
     ]
     return Links

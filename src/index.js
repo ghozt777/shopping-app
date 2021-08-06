@@ -7,10 +7,14 @@ import {UsersProvider} from './components/UsersProvider'
 import {AuthProvider} from './components/AuthProvider'
 import {ApiProvider} from './components/FakeApi'
 import {LoadingProvider} from './components/LoadingProvider'
+import {ProductsProvider} from './components/ProductsProvider'
+import {CartProvider} from './components/CartProvider'
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
+    <CartProvider>
+    <ProductsProvider>
       <UsersProvider>
         <LoadingProvider>
           <ApiProvider>
@@ -20,6 +24,8 @@ ReactDOM.render(
           </ApiProvider>
         </LoadingProvider>
       </UsersProvider>
+      </ProductsProvider>
+      </CartProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
