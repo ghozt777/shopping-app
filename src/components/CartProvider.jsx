@@ -11,10 +11,10 @@ function reducer(prevState,action){
             const isItemInCart = prevState.find(item => item.id===action.payload.id)
             if(isItemInCart){
                 return prevState.map(item => {
-                    return item.id===action.payload.id ? {...item, quantity :item.quantity++} : item
+                    return item.id===action.payload.id ? {...item, quantity: item.quantity+1} : item
                 })
             }else{
-                return [...prevState,action.payload]
+                return [...prevState,{id:action.payload.id , name:action.payload.name, quantity: 1}]
             }
         default:
             return prevState
