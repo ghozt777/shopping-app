@@ -20,8 +20,8 @@ function App() {
         <Route path='/credentials' element={<Credentials />} />
         <Route path='/create-account' element={<CreateAccount />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/products' element={<Products />} />
-        <Route path='/products/:id' element={<Products />} />
+        <PrivateRoute path='/products' element={<Products />} />
+        <PrivateRoute path='/products/:id' element={<Products />} />
         <PrivateRoute path='/Cart' element={<Cart /> } />
       </Routes>
     </div>
