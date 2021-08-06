@@ -13,8 +13,8 @@ import {CartProvider} from './components/CartProvider'
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-    <CartProvider>
     <ProductsProvider>
+    <CartProvider>
       <UsersProvider>
         <LoadingProvider>
           <ApiProvider>
@@ -24,8 +24,8 @@ ReactDOM.render(
           </ApiProvider>
         </LoadingProvider>
       </UsersProvider>
-      </ProductsProvider>
       </CartProvider>
+      </ProductsProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')

@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react"
+import { createContext, useContext, useEffect, useReducer } from "react"
 
 const ProductsData = createContext()
 
@@ -6,7 +6,32 @@ export const useProducts = () => useContext(ProductsData)
 
 export const ProductsProvider = ({children}) => {
 
-    const [products,setProducts] = useState([
+    function reducer(prevState,action){
+        switch(action.type){
+            case 'ADD':
+                return prevState.map(item => {
+                    return item.id===action.payload ? {...item,quantity:item.quantity+1} : item
+                })
+            
+                case 'ADD_ALL':
+                return prevState.map(item => {
+                    return item.id===action.payload ? {...item,quantity:10} : item
+                })
+
+            case 'REDUCE':
+                return prevState.map(item => {
+                    return item.id===action.payload ? {...item,quantity:item.quantity-1} : item
+                })
+
+            case 'INITIALIZE':
+                return [...action.payload]
+
+            default:
+                return prevState
+        }
+    }
+    
+    const [products,setProducts] = useReducer(reducer,[
         {
             id: 1,
             name:'Item 1',
@@ -32,6 +57,15 @@ export const ProductsProvider = ({children}) => {
             quantity: 10
         },
     ])
+
+    useEffect(() => {
+        const data = localStorage.getItem('products')
+        setProducts({type:'INITIALIZE',payload:JSON.parse(data)})
+    },[])
+
+    useEffect(() => {
+        localStorage.setItem('products',JSON.stringify(products))
+    })
 
     return(
         <ProductsData.Provider value={{products,setProducts}}>
