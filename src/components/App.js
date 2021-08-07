@@ -9,6 +9,7 @@ import {Login} from '../pages/Login'
 import {PrivateRoute} from './PrivateRoute'
 import {Cart} from '../pages/Cart'
 import {Products} from '../pages/Products'
+import {PageNotFound} from '../pages/404'
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path='/credentials' element={<Credentials />} />
         <Route path='/create-account' element={<CreateAccount />} />
         <Route path='/login' element={<Login />} />
+        <Route path='*' element={<PageNotFound />} />
         <PrivateRoute path='/products' element={<Products />} />
         <PrivateRoute path='/products/:id' element={<Products />} />
         <PrivateRoute path='/Cart' element={<Cart /> } />
