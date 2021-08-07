@@ -23,6 +23,14 @@ export const NavBar = () => {
         <>
         <div className='NavBar'>
             <a href='https://www.amazon.com/'><img className='NavBar__logo' src={logo} alt='logo' /></a>
+            <div className="NavBar__Header">
+                <div className='NavBar__Header siteName'>
+                scamazon.com
+                </div>
+                <div className='NavBar__Header tagline'>
+                    the shadiest site you've ever seen
+                </div>
+            </div>
             <div className='NavBar__Links'>
                 {
                     Links.map(link => {
