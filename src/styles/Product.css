@@ -1,0 +1,36 @@
+
+.Products{
+    display:flex;
+    flex-direction:column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.Products .Product__List{
+  width: 80%;
+  margin: 0.2rem 0;
+  display: flex;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 1px 2px -1px rgb(192, 192, 192);
+  justify-content: space-evenly;
+  background-color: #EEF2FF;
+}
+
+.AddToCart{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.AddToCart .btn{
+    padding: 0.2rem 0.8em;
+    background: transparent;
+    border: 0.1rem solid slateblue;
+    outline: none;
+    color: black;
+    margin-right: 0.8rem;
+}
+.AddToCart .btn:hover{
+    color: orange;
+}
