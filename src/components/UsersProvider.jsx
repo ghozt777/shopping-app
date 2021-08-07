@@ -26,13 +26,13 @@ function reducer(prevState,action){
                         })
                     }else{
                         return prevState.map(users => {
-                            return users.username===user.username ? {...users,cart:[...users.cart,{id:action.payload.product.id , name:action.payload.product.name, price:action.payload.price, quantity:1}]} : users
+                            return users.username===user.username ? {...users,cart:[...users.cart,{id:action.payload.product.id , name:action.payload.product.name, price:action.payload.product.price, quantity:1}]} : users
                         })
                     }
                 }
                 else{
                     return prevState.map(users => {
-                        return users.username===user.username ? {...users,cart:[{id:action.payload.product.id , name:action.payload.product.name, price:action.payload.price, quantity:1}]} : users
+                        return users.username===user.username ? {...users,cart:[{id:action.payload.product.id , name:action.payload.product.name, price:action.payload.product.price, quantity:1}]} : users
                     })
                 }
             }

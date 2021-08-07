@@ -7,6 +7,12 @@ export const Cart = () => {
     const {users,active,setUsers} = useUsers()
     const currUser = users.find(user => user.username===active)
 
+    function calTotal(){
+        return currUser.cart.reduce((acc,item) => {
+            return item.quantity*item.price + acc
+        },0)
+    }
+
     function genPage(){
         return currUser.cart ? (
             <>
@@ -32,7 +38,7 @@ export const Cart = () => {
                 })
             }
             </ul>
-            <h2> The Total Cost is : {}</h2>
+            <h2> The Total Cost is : {calTotal()}</h2>
             </>
         ) : (
             <>
