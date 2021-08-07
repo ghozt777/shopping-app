@@ -17,7 +17,7 @@ export const CreateAccount = () => {
         console.log(userExist)
         if(!userExist){
         setLogin(true)
-        setUsers(prevState => [...prevState,userInfo])
+        setUsers({type:'ADD_USER',payload:userInfo})
         setActive(userInfo.username)
         localStorage.setItem('active' , JSON.stringify(userInfo.username))
         navigate(state?.from? state.from : '/')}

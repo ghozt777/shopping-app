@@ -1,11 +1,18 @@
 import {useProducts} from '../components/ProductsProvider'
-import {useCart} from '../components/CartProvider'
+import {useUsers} from '../components/UsersProvider'
 
 export const Products = () => {
     
     const {products,setProducts} = useProducts()
-    const {setCartItems} = useCart()
+    const {users,active,setUsers} = useUsers()
 
+    function addToCartHandler(product){
+        const user = users.find(user => user.username===active)
+        if(user){
+            setUsers({type:'ADD_TO_CART',payload:{user:user,product:product}})
+            setProducts({type:'REDUCE',payload:product.id})
+        }
+    }
 
     return(
         <>
@@ -25,8 +32,7 @@ export const Products = () => {
                         <div> {product.price} </div>
                         <div> {product.quantity} </div>
                         <button onClick={() => {
-                            setCartItems({type:'ADD_ITEM',payload:product})
-                            setProducts({type:'REDUCE',payload:product.id})
+                            addToCartHandler(product)
                             }}> + </button>
                     </div>
                        

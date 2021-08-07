@@ -1,35 +1,28 @@
-import { useEffect, useState } from 'react'
-import {useCart} from '../components/CartProvider'
 import {useProducts} from '../components/ProductsProvider'
+import {useUsers} from '../components/UsersProvider'
 
 export const Cart = () => {
     
-    const {cartItems,setCartItems} = useCart()
     const {setProducts} = useProducts()
+    const {users,active,setUsers} = useUsers()
+    const currUser = users.find(user => user.username===active)
 
-
-    const [total,setTotal] = useState()
-    useEffect(() => {
-        setTotal(cartItems.reduce((acc,item) => {
-            return item.price*item.quantity + acc
-        },0))
-    },[cartItems])
-
-    return(
-        <>
-            <h1> Cart </h1>
+    function genPage(){
+        return currUser.cart ? (
+            <>
+                <h1> Cart </h1>
             <ul>
             {
-                cartItems.map(item => {
+                currUser.cart.map(item => {
                     return item.quantity>0 ? (
                         <li>
                             {item.name}  {item.price}  {item.quantity} 
                             <button onClick = {() => {
-                                setCartItems({type:'REDUCE_ITEM' , payload:item})
+                                setUsers({type:'REDUCE_FROM_CART',payload:{user:currUser,product:item}})
                                 setProducts({type:'ADD',payload:item.id})
                                 }}> - </button>
                             <button onClick = {() => {
-                                setCartItems({type:'DELETE_ITEM' , payload:item})
+                                setUsers({type:'REMOVE_FROM_CART',payload:{user:currUser,product:item}})
                                 setProducts({type:'ADD_ALL',payload:item.id})
                                 }}> Delete Item </button>
                         </li>
@@ -39,7 +32,18 @@ export const Cart = () => {
                 })
             }
             </ul>
-            <h2> The Total Cost is : {total}</h2>
+            <h2> The Total Cost is : {}</h2>
+            </>
+        ) : (
+            <>
+                <h1> No Items In The Cart</h1>
+            </>
+        )
+    }
+
+    return(
+        <>
+            {genPage()}
         </>
     ) 
 }

@@ -1,20 +1,87 @@
-import {createContext, useContext , useEffect, useState} from 'react' 
+import {createContext, useContext , useEffect, useReducer, useState} from 'react' 
 
 const UserData = createContext()
 
 export const useUsers = () => useContext(UserData)
 
+
+function reducer(prevState,action){
+    switch(action.type){
+        case 'ADD_USER':
+            return [...prevState,action.payload]
+
+        case 'INITIALIZE':
+            return [...action.payload]
+        
+        case 'ADD_TO_CART':
+            const user = prevState.find(user => user.username===action.payload.user.username)
+            console.log('Inside of the ADD TO CART')
+            if(user){
+                if(user.cart){
+                    const isProductInTheCart = user.cart.find(product => product.id===action.payload.product.id)
+                    if(isProductInTheCart){
+                        return prevState.map(users => {
+                            return users.username===user.username ? {...users,cart:users.cart.map(item => {
+                                return item.id===action.payload.product.id ? {...item,quantity:item.quantity+1} : item
+                            })} : users
+                        })
+                    }else{
+                        return prevState.map(users => {
+                            return users.username===user.username ? {...users,cart:[...users.cart,{id:action.payload.product.id , name:action.payload.product.name, price:action.payload.price, quantity:1}]} : users
+                        })
+                    }
+                }
+                else{
+                    return prevState.map(users => {
+                        return users.username===user.username ? {...users,cart:[{id:action.payload.product.id , name:action.payload.product.name, price:action.payload.price, quantity:1}]} : users
+                    })
+                }
+            }
+            else{
+                return [...prevState]
+            }
+
+        case 'REDUCE_FROM_CART':
+            if(action.payload.user){
+                return prevState.map(users => {
+                    return users.username===action.payload.user.username ? {...users,cart:users.cart.map(item => {
+                        return item.id===action.payload.product.id ? {...item,quantity:item.quantity-1} : item
+                    })} : users
+                })
+            }
+            else{
+                return [...prevState]
+            }
+        
+            case 'REMOVE_FROM_CART':
+                if(action.payload.user){
+                    return prevState.map(users => {
+                        return users.username===action.payload.user.username ? {...users,cart:users.cart.map(item => {
+                            return item.id===action.payload.product.id ? {...item,quantity:0} : item
+                        })} : users
+                    })
+                }
+                else{
+                    return [...prevState]
+                }
+            
+
+
+        default:
+            return [...prevState]
+    }
+}
+
 export const UsersProvider = ({children}) => {
     
-    const [users,setUsers] = useState([])
+    const [users,setUsers] = useReducer(reducer,[])
     const [active,setActive] = useState('')
     
     useEffect(() => {
         const usersData = localStorage.getItem('users')
         const activeUser = localStorage.getItem('active')
         if(usersData){
-            const user = JSON.parse(usersData)
-            setUsers(user)
+            setUsers({type:'INITIALIZE',payload:JSON.parse(usersData)})
         }if(activeUser){
             setActive(JSON.parse(activeUser))
         }
