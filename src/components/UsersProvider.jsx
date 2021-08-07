@@ -15,7 +15,6 @@ function reducer(prevState,action){
         
         case 'ADD_TO_CART':
             const user = prevState.find(user => user.username===action.payload.user.username)
-            console.log('Inside of the ADD TO CART')
             if(user){
                 if(user.cart){
                     const isProductInTheCart = user.cart.find(product => product.id===action.payload.product.id)
