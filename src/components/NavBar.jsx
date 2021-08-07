@@ -3,6 +3,8 @@ import { NavLink } from 'react-router-dom'
 import { LastLogin } from './LastLogin'
 import {useAuth} from './AuthProvider'
 import {useUsers} from './UsersProvider'
+import '../styles/NavLink.css'
+import logo from '../pages/images/logo.png'
 
 export const NavBar = () => {
     
@@ -22,33 +24,29 @@ export const NavBar = () => {
             }}
             > Logout </button>
         ) : (
-            <button><NavLink to='/login'> Login </NavLink></button>
+            <button className='btn'><NavLink className='btn__NavLink' to='/login'> Login </NavLink></button>
         )
     }
     
     return(
         <>
-        <div style={{display:'flex' , alignItems:'center', justifyContent:'flex-start'}}>
-            <nav style={{padding:'1rem 1rem 1rem 1rem'}}>
+        <div className='NavBar'>
+            <a href='https://www.amazon.com/'><img className='NavBar__logo' src={logo} alt='logo' /></a>
+            <div className='NavBar__Links'>
                 {
                     Links.map(link => {
                         return (
                             <>
                             <NavLink 
                             end
-                            activeStyle = {{
-                                color:'orange',
-                                fontSize:'2rem',
-                                fontWeight:'bold'
-                            }}
-                            style={{ textDecoration:'none' ,marginLeft:'0.3rem', color:'red'}}
-                            to={link.path}> { link.pageName } </NavLink> 
-                            <div style={{display:'inline' , fontSize:'2rem'}}> || </div>
+                            className='NavLink'
+                            activeClassName='NavLink-seleted'
+                            to={link.path}><span>{link.logo}</span> { link.pageName } </NavLink> 
                             </>
                         )
                     })
                 }
-            </nav>
+            </div>
             {dispBtn()}
         </div>
             <LastLogin/>

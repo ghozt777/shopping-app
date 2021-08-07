@@ -1,5 +1,12 @@
 import {useAuth} from './AuthProvider'
 import {useUsers} from './UsersProvider'
+import {
+    AiFillHome , 
+    AiFillApple , 
+    AiFillLock , 
+    AiOutlineShopping
+} from 'react-icons/ai'
+import {BsFillBagFill , BsUnlock} from 'react-icons/bs'
 
 export const GenerateLinks = () => {
     
@@ -8,23 +15,28 @@ export const GenerateLinks = () => {
     const Links = [
         {
             pageName: 'Home',
-            path: '/'
+            path: '/',
+            logo: <AiFillHome />
         },
         {
             pageName: 'Address',
-            path: '/address'
+            path: '/address',
+            logo: <AiFillApple />
         },
         {
             pageName: login ? `Welcome ${active}` : 'Login / Create Account',
-            path: '/credentials'
+            path: '/credentials',
+            logo: login ? <BsUnlock />  :<AiFillLock />
         },
         {
             pageName: 'Cart',
-            path: '/cart'
+            path: '/cart',
+            logo: <AiOutlineShopping />
         },
         {
             pageName: 'products',
-            path: '/products'
+            path: '/products',
+            logo: <BsFillBagFill />
         }
     ]
     return Links
