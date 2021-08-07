@@ -5,6 +5,7 @@ import {useAuth} from './AuthProvider'
 import {useUsers} from './UsersProvider'
 import '../styles/NavLink.css'
 import logo from '../pages/images/logo.png'
+import {Divider} from '../components/Divider'
 
 export const NavBar = () => {
     
@@ -14,19 +15,9 @@ export const NavBar = () => {
     
     
     const Links = GenerateLinks()
-    
-    const dispBtn = () => {
-        return login ? (
-            <button
-            onClick={() => {
-                setLogin(false)
-                setActive('')
-            }}
-            > Logout </button>
-        ) : (
-            <button className='btn'><NavLink className='btn__NavLink' to='/login'> Login </NavLink></button>
-        )
-    }
+
+    const logInBtn = <button className='btn'><NavLink className='btn__NavLink' to='/login'> Login </NavLink></button>
+    const logOutBtn =  <button className='btn' onClick={() => {setLogin(false) ;setActive('')}}> Logout </button>
     
     return(
         <>
@@ -47,10 +38,12 @@ export const NavBar = () => {
                     })
                 }
             </div>
-            {dispBtn()}
+            <div className='NavBar__btn'>
+            {login? logOutBtn : logInBtn}
+            </div>
         </div>
             <LastLogin/>
-            <div style={{padding:'0rem 0rem 0.3rem 0rem' , backgroundColor:'black' , margin:'0rem 1rem'}}></div>
+            <Divider />
         </>
     )
 }
