@@ -14,6 +14,22 @@ export const Products = () => {
         }
     }
 
+    function genButton(product){
+        if(product.quantity>0){
+            return(
+                <button onClick={() => {
+                    addToCartHandler(product)
+                    }}> + </button>
+            )
+        }else{
+            return(
+                <>
+                    <small> Product Out Of Stock </small>
+                </>
+            )
+        }
+    }
+
     return(
         <>
             <h1> Products Page </h1>
@@ -31,9 +47,7 @@ export const Products = () => {
                         <div> {product.name} </div>
                         <div> {product.price} </div>
                         <div> {product.quantity} </div>
-                        <button onClick={() => {
-                            addToCartHandler(product)
-                            }}> + </button>
+                        {genButton(product)}
                     </div>
                        
                     )

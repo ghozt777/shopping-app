@@ -20,7 +20,7 @@ export const ProductsProvider = ({children}) => {
 
             case 'REDUCE':
                 return prevState.map(item => {
-                    return item.id===action.payload ? {...item,quantity:item.quantity-1} : item
+                    return item.id===action.payload ? item.quantity>0 ? {...item,quantity:item.quantity-1} : {...item,quantity:0} : item
                 })
 
             case 'INITIALIZE':
