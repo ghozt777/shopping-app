@@ -54,10 +54,10 @@ function reducer(prevState,action){
         
             case 'REMOVE_FROM_CART':
                 if(action.payload.user){
+                    const user = prevState.find(user => user.username===action.payload.user.username)
+                    const itemToBeDeleted = user.cart.find(item => item.id===action.payload.product.id)
                     return prevState.map(users => {
-                        return users.username===action.payload.user.username ? {...users,cart:users.cart.map(item => {
-                            return item.id===action.payload.product.id ? {...item,quantity:0} : item
-                        })} : users
+                        return users.username===action.payload.user.username ? {...users,cart:users.cart.filter((item) => item.id!==itemToBeDeleted.id)} : users
                     })
                 }
                 else{
