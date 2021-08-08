@@ -17,13 +17,15 @@ export function Product({...props}){
             setProducts({type:'REDUCE',payload:product.id})
         }
     }
+    
+    const disableButton = login ? false : true
 
     function genButton(product){
         if(product.quantity>0){
             return(
                 <div  className='AddToCart'>
                 <button className='AddToCart btn' 
-                disabled={login ? 'false' : 'true'}
+                disabled={disableButton}
                 onClick={() => {
                     addToCartHandler(product)
                     }}> <AiOutlineShoppingCart /> </button>
