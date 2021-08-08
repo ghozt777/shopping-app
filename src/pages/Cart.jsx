@@ -7,12 +7,6 @@ export const Cart = () => {
     const {users,active,setUsers} = useUsers()
     const currUser = users.find(user => user.username===active)
 
-    function calTotal(){
-        return currUser.cart.reduce((acc,item) => {
-            return item.quantity*item.price + acc
-        },0)
-    }
-
     function genPage(){
         return currUser.cart ? (
             <>
@@ -25,10 +19,12 @@ export const Cart = () => {
                             {item.name}  {item.price}  {item.quantity} 
                             <button onClick = {() => {
                                 setUsers({type:'REDUCE_FROM_CART',payload:{user:currUser,product:item}})
+                                setUsers({type:'SET_TOTAL',payload:{user:currUser}})
                                 setProducts({type:'ADD',payload:item.id})
                                 }}> - </button>
                             <button onClick = {() => {
                                 setUsers({type:'REMOVE_FROM_CART',payload:{user:currUser,product:item}})
+                                setUsers({type:'SET_TOTAL',payload:{user:currUser}})
                                 setProducts({type:'ADD_ALL',payload:item.id})
                                 }}> Delete Item </button>
                         </li>
@@ -38,7 +34,7 @@ export const Cart = () => {
                 })
             }
             </ul>
-            <h2> The Total Cost is : {calTotal()}</h2>
+            <h2> The Total Cost is : {currUser.total}</h2>
             </>
         ) : (
             <>

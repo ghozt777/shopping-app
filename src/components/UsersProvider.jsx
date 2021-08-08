@@ -64,6 +64,16 @@ function reducer(prevState,action){
                     return [...prevState]
                 }
             
+            case 'SET_TOTAL':
+                const isUser = prevState.find(user => user.username===action.payload.user.username)
+                console.log(isUser.username)
+                if(isUser){
+                    return prevState.map(users => {
+                        return users.username===isUser.username ? {...users,total:users.cart.reduce((acc,item) => item.quantity*item.price + acc,0)} : users
+                    })
+                }else{
+                    return [...prevState]
+                }
 
 
         default:

@@ -14,6 +14,7 @@ export function Product({...props}){
         const user = users.find(user => user.username===active)
         if(user){
             setUsers({type:'ADD_TO_CART',payload:{user:user,product:product}})
+            setUsers({type:'SET_TOTAL',payload:{user:user}})
             setProducts({type:'REDUCE',payload:product.id})
         }
     }
