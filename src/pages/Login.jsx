@@ -9,6 +9,17 @@ export const Login = () => {
     const[userInfo,setUserInfo] = useState({})
     const {isLoading} = useLoading()
 
+    const clickHandler = () => {
+        resolveLogin({...userInfo})
+    }
+
+    const handleKeypress = e => {
+        console.log(e.keyCode)
+      if (e.key === 'Enter') {
+        clickHandler();
+      }
+    }
+
    const pageContent = () => {
        if(!isLoading){
            return(
@@ -30,6 +41,7 @@ export const Login = () => {
             type='text'
             placeholder ='password'
             onFocus={e => e.target.value = ''}
+            onKeyPress={e => handleKeypress(e)}
             onChange = {(e) => setUserInfo(prevState => {
                 return{
                     ...prevState,
@@ -56,9 +68,6 @@ export const Login = () => {
        }
    }
 
-    const clickHandler = () => {
-        resolveLogin({...userInfo})
-    }
     
     
     return(

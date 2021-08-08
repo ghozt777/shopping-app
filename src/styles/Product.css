@@ -34,3 +34,7 @@
 .AddToCart .btn:hover{
     color: orange;
 }
+
+.AddToCart .btn:disabled{
+    background-color: #9CA3AF;
+}

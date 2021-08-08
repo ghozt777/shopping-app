@@ -1,12 +1,14 @@
 import {useProducts} from '../components/ProductsProvider'
 import {useUsers} from '../components/UsersProvider'
 import {AiOutlineShoppingCart} from 'react-icons/ai'
+import {useAuth} from './AuthProvider'
 import '../styles/Product.css'
 
 export function Product({...props}){
     
     const {products,setProducts} = useProducts()
     const {users,active,setUsers} = useUsers()
+    const {login} = useAuth()
 
     function addToCartHandler(product){
         const user = users.find(user => user.username===active)
@@ -20,7 +22,9 @@ export function Product({...props}){
         if(product.quantity>0){
             return(
                 <div  className='AddToCart'>
-                <button className='AddToCart btn' onClick={() => {
+                <button className='AddToCart btn' 
+                disabled={login ? 'false' : 'true'}
+                onClick={() => {
                     addToCartHandler(product)
                     }}> <AiOutlineShoppingCart /> </button>
                 <small>Add to cart</small>
